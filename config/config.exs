@@ -18,6 +18,10 @@ config :heat_tags, HeatTagsWeb.Endpoint,
   pubsub_server: HeatTags.PubSub,
   live_view: [signing_salt: "Lz+PgE65"]
 
+config :heat_tags, HeatTags.Scheduler, jobs: [
+  {"* * * * *", {HeatTags.Tags.Count, :call, []}}
+]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
